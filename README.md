@@ -61,74 +61,45 @@ Depending on how the script is written, it may:
 
 Check the script contents to adjust IP addresses, ports, or kernel module paths.
 
+## Concepts used
 
-### 2. Running the Binaries Directly
+### **1. System Calls**
+The programs rely heavily on low-level Linux system calls:
+- `socket()`, `connect()` – networking and IPC
+- `dup2()` – file descriptor redirection
+- `execve()` – process replacement
+- `open()`, `read()`, `write()` (inside the launcher or kmod code)
+These show how user-space interacts directly with the kernel.
 
-You can also run the compiled binaries yourself.
+### **2. File Descriptors**
+The redirection logic demonstrates how:
+- STDIN, STDOUT, STDERR (0,1,2)
+- can be reassigned to sockets or devices  
+This is a core OS abstraction used everywhere from shells to daemons.
 
-#### `kmod_launcher`
+### **3. Process Management**
+The use of:
+- `execve()` for launching a new program image
+- The launcher preparing the environment for another process  
+illustrates how processes are created, transformed, and managed by the OS.
 
-Typical usage might look like:
+### **4. Kernel–User Space Boundary**
+`kmod_launcher.c` interacts with kernel modules, highlighting:
+- User-space to kernel communication
+- Device interfaces and system-level resource management
+- The controlled transition across privilege boundaries
 
-```bash
-./kmod_launcher [options]
-```
+### **5. Memory & Structures**
+Working with:
+- `struct sockaddr_in`
+- Stack-allocated buffers
+shows how OS-level APIs require structured data layouts matching kernel expectations.
 
-Common patterns could include:
-
-* Specifying the path to a kernel module,
-* Setting device names or parameters,
-* Triggering module load/unload or simple I/O.
-
-Open `kmod_launcher.c` to see the exact expected arguments and behavior.
-
-#### `rev`
-
-Typical usage might look like:
-
-
-`./rev [options]`
-
-
-Depending on the implementation, this may:
-
-* Connect back to a listener (IP/port),
-* Exchange data with a remote endpoint,
-* Act as a test harness for the module’s functionality.
-
-Again, refer to `rev.c` for the specific arguments and protocol expected.
-
-> 💡 If the programs implement `-h` or `--help`, you can try:
->
-> ```bash
-> ./kmod_launcher -h
-> ./rev -h
-> ```
-
-
-
-
-## Troubleshooting
-
-* **Build Fails**
-
-  * Ensure `gcc` and `make` are installed.
-  * Check the `Makefile` for hardcoded paths or flags that don’t match your environment.
-  * Run with verbose output if needed, e.g. `make V=1` (if supported).
-
-* **Permission Errors**
-
-  * Some operations (like loading kernel modules or binding certain ports) require root:
-
-    ```bash
-    sudo ./kmod_launcher ...
-    sudo ./launch
-    ```
-
-* **No Output / Hanging**
-
-  * Verify that any remote listener (for a reverse connection) is running and reachable.
-  * Double-check IP addresses and port numbers in the code and scripts.
+### **6. Networking (Sockets API)**
+The project uses the BSD sockets interface, demonstrating:
+- TCP client creation
+- Address translation (`inet_aton/inet_addr`)
+- Kernel-managed network I/O paths
 
 
 
