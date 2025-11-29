@@ -1,0 +1,1 @@
+savedcmd_/home/berzi/Desktop/starburst-killchain/rootkit/modules.order := {   echo /home/berzi/Desktop/starburst-killchain/rootkit/kmod_launcher.o; :; } > /home/berzi/Desktop/starburst-killchain/rootkit/modules.order

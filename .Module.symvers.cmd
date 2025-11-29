@@ -1,0 +1,1 @@
+savedcmd_/home/berzi/Desktop/starburst-killchain/rootkit/Module.symvers :=  scripts/mod/modpost -M -m -a      -o /home/berzi/Desktop/starburst-killchain/rootkit/Module.symvers -T /home/berzi/Desktop/starburst-killchain/rootkit/modules.order -i Module.symvers -e 
