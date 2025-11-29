@@ -1,1 +1,0 @@
-savedcmd_/home/berzi/Desktop/starburst-killchain/rootkit/kmod_launcher.mod := printf '%s\n'   kmod_launcher.o | awk '!x[$$0]++ { print("/home/berzi/Desktop/starburst-killchain/rootkit/"$$0) }' > /home/berzi/Desktop/starburst-killchain/rootkit/kmod_launcher.mod

@@ -1,1 +1,0 @@
-savedcmd_/home/berzi/Desktop/starburst-killchain/rootkit/kmod_launcher.ko := ld -r -m elf_x86_64 -z noexecstack --build-id=sha1  -T scripts/module.lds -o /home/berzi/Desktop/starburst-killchain/rootkit/kmod_launcher.ko /home/berzi/Desktop/starburst-killchain/rootkit/kmod_launcher.o /home/berzi/Desktop/starburst-killchain/rootkit/kmod_launcher.mod.o
